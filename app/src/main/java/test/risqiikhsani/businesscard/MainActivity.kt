@@ -25,8 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import test.risqiikhsani.businesscard.ui.theme.BusinessCardTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,20 +39,20 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.primary
                 ) {
 
-                    MessageCard(Message("Risqi Ikhsani", "Android Developer Extraordinaire","0831212121","@risqiikhsani","risqiikhsani16@gmail.com"))
+                    BusinessCardBox(Identity("Risqi Ikhsani", "Android Developer Extraordinaire","0831212121","@risqiikhsani","risqiikhsani16@gmail.com"))
                 }
             }
         }
     }
 }
 
-data class Message(val name: String, val title: String,val phonenumber: String, val twitter: String,val email: String)
+data class Identity(val name: String, val title: String,val phonenumber: String, val twitter: String,val email: String)
 
 @Composable
-fun MessageCard(msg: Message) {
+fun BusinessCardBox(msg: Identity) {
     Box(
         modifier = Modifier
             .padding(all = 8.dp)
@@ -62,26 +64,26 @@ fun MessageCard(msg: Message) {
         ) {
             Image(
                 painter = painterResource(R.drawable.android_logo),
-                contentDescription = "Contact profile picture",
+                contentDescription = "Android",
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(200.dp)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Text(text = msg.name)
+            Text(text = msg.name, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Text(text = msg.title)
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(100.dp))
             ContactInfoRow(
-                icon = painterResource(R.drawable.phone_logo), // Replace with phone icon
+                icon = painterResource(R.drawable.phone_logo),
                 text = msg.phonenumber
             )
             ContactInfoRow(
-                icon = painterResource(R.drawable.share_logo), // Replace with Twitter icon
+                icon = painterResource(R.drawable.share_logo),
                 text = msg.twitter
             )
             ContactInfoRow(
-                icon = painterResource(R.drawable.email_logo), // Replace with email icon
+                icon = painterResource(R.drawable.email_logo),
                 text = msg.email
             )
         }
@@ -96,7 +98,7 @@ fun ContactInfoRow(icon: Painter, text: String) {
     ) {
         Image(
             painter = icon,
-            contentDescription = null, // Description can be null for decorative images
+            contentDescription = null,
             modifier = Modifier
                 .size(24.dp)
         )
